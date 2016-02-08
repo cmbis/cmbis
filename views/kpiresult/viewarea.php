@@ -75,7 +75,7 @@ $dataProvider = new SqlDataProvider([
                 'attribute' => 'ผลงาน',
                 'value' => 'kpi_result'
             ],*/
-            //'kpi_miss',
+            'kpi_miss',
             'kpi_percen_result' => [
                 'attribute' => '%',
                 'value' => 'percen'

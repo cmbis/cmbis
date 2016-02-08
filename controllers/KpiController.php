@@ -41,6 +41,22 @@ class KpiController extends Controller
         ]);
     }
 
+    public function actionKpilink()
+    {
+        $searchModel = new CmbisKpiSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('kpilink', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionViewtable()
+    {
+        return $this->render('viewtable');
+    }
+
     /**
      * Displays a single CmbisKpi model.
      * @param integer $kpi_id

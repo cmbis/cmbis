@@ -49,6 +49,16 @@ class KpiresultController extends Controller {
         ]);
     }
 
+    public function actionChangwat1() {
+        $searchModel = new CmbisKpiResultSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('changwat', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
+    }
+
     public function actionAmpur() {
         $searchModel = new CmbisKpiResultSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

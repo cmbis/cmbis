@@ -18,8 +18,6 @@ $this->title = 'ผลงานตามตัวชี้วัด';
 $this->params['breadcrumbs'][] = $this->title;
 
 $kpi_id=$searchModel['kpi_id'];
-$pop_group=$searchModel['kpi_miss'];
-//echo "ค่า pop_group = ".$pop_group;
 
 $dataProvider = new SqlDataProvider([
     'sql' => 'SELECT *, sum(cmbis_kpi_results.kpi_score) as sum_score , ' . 
@@ -27,25 +25,21 @@ $dataProvider = new SqlDataProvider([
              'substr(cmbis_kpi_results.villcode,1,4) as vcode ' .
              'FROM Campur ' .
              'INNER JOIN cmbis_kpi_results ON (substr(cmbis_kpi_results.villcode,1,4)=Campur.ampurcodefull) ' .
-             'INNER JOIN cmbis_hospital ON cmbis_hospital.hcode=cmbis_kpi_results.hcode ' .
-             'INNER JOIN cmbis_pop_groups ON cmbis_pop_groups.pop_group_id=cmbis_hospital.pop_group ' .
              'WHERE changwatcode=50 and cmbis_kpi_results.kpi_target <> 0 ' .
-             'AND kpi_id=:kpi_id ' .
-             'AND cmbis_hospital.pop_group=:pop_group '.
+             'AND kpi_id=:kpi_id '.
              'GROUP BY ampurcode ' .
              'ORDER BY avg_score DESC',
     'pagination' => [
         'pageSize' => 25,
     ],
-    'params' => [':kpi_id' => $kpi_id,
-                 ':pop_group' => $pop_group],
+    'params' => [':kpi_id' => $kpi_id],
 ]);
 
 ?>
 
 <?php yii\widgets\Pjax::begin(['id' => 'grid-kpiresult-pjax','timeout'=>5000]) ?>
 
-<?php  echo $this->render('_searcharea', ['model' => $searchModel]);?>
+<?php  echo $this->render('_searchchangwat', ['model' => $searchModel]);?>
 <br>
 
 
@@ -58,8 +52,7 @@ $dataProvider = new SqlDataProvider([
                 ],
                 'panel'=>[
                     'type'=>GridView::TYPE_PRIMARY,
-                    'heading'=>'เปรียบเทียบตามขนาดประชากร',
-
+                    'heading'=>'เปรียบเทียบทั้งจังหวัด',
                 ],
                 'columns' => [
                     ['class'=>'kartik\grid\SerialColumn'],
@@ -72,7 +65,7 @@ $dataProvider = new SqlDataProvider([
                         },
                         'detail'=>function ($model) {
                             //echo $model['villcode'];
-                            return Yii::$app->controller->renderPartial('viewarea', ['model'=>$model]);
+                            return Yii::$app->controller->renderPartial('viewampur', ['model'=>$model]);
                         },
                     ],
                     'ampurname' => [
@@ -83,6 +76,7 @@ $dataProvider = new SqlDataProvider([
                         'attribute' => 'คะแนนรวม',
                         'value' => 'sum_score'
                     ],*/
+                    'hcode',
                     'avg_score' => [
                         'attribute' => 'ค่าเฉลี่ยคะแนน',
                         'format'=>['decimal',2],

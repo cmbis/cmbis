@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "cmbis_kpi_result".
@@ -56,6 +57,22 @@ class CmbisKpiResult extends \yii\db\ActiveRecord
             ->hasMany(CmbisKpiResult::className(), ['hcode'=>'hcode','kpi_id'=>'kpi_id'])
             ->sum('kpi_target');
     }
+
+    //หาค่าเฉลี่ยของ kpi_score
+    public function getAvgScore()
+    {
+        return $this
+            ->hasMany(CmbisKpiResult::className(), ['hcode'=>'hcode','kpi_id'=>'kpi_id'])
+            ->average('kpi_score');
+    }
+
+    public function getAcode()
+    {
+        return $this
+            ->hasMany(CmbisKpiResult::className(), ['hcode'=>'hcode','kpi_id'=>'kpi_id'])
+            ->substr('kpi_score',1,4);
+    }
+
     
     /**
      * @inheritdoc
@@ -65,7 +82,7 @@ class CmbisKpiResult extends \yii\db\ActiveRecord
         return [
             'kpi_id' => 'Kpi ID',
             'kpi_b_year' => 'ปี',
-            'hcode' => 'สถานบริการ',
+            'hcode' => 'รหัสสถานบริการ',
             'villcode' => 'หมู่',
             'kpi_result' => 'ผลงาน',
             'kpi_target' => 'เป้าหมาย',
@@ -74,7 +91,9 @@ class CmbisKpiResult extends \yii\db\ActiveRecord
             'kpi_score' => 'คะแนน',
             'sumResult'=>Yii::t('app', 'ผลงาน'),
             'sumTarget'=>Yii::t('app', 'เป้าหมาย'),
-            'percen'=>Yii::t('app', '%')
+            'percen'=>Yii::t('app', '%'),
+            'avgScore'=>Yii::t('app','คะแนนเฉลี่ย'),
+            'acode' => Yii::t('app','อำเภอ')
         ];
     }
 
@@ -83,8 +102,13 @@ class CmbisKpiResult extends \yii\db\ActiveRecord
         return $this->hasOne(Chospital::className(),['hoscode'=>'hcode']);
     }
 
-    public function getAmpurcode()
+    public function getAmphur()
     {
-        return $this->hasOne(Campur::className(),['ampurcodefull'=>'villcode']);
+        return $this->hasOne(CmbisAreaHosp::className(),['Hosp'=>'hcode']);
+    }
+
+    public function getKpitable()
+    {
+        return $this->hasOne(CmbisKpi::className(),['kpi_id'=>'kpi_id']);
     }
 }

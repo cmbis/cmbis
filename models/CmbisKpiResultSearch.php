@@ -21,7 +21,7 @@ class CmbisKpiResultSearch extends CmbisKpiResult {
         return [
             [['kpi_id', 'kpi_result', 'kpi_target', 'kpi_miss'], 'integer'],
             [['kpi_b_year', 'hcode', 'villcode', 'q'], 'safe'],
-            [['kpi_percen_result', 'kpi_score'], 'number'],
+            [['kpi_percen_result', 'kpi_score','avgScore'], 'number'],
         ];
     }
 
@@ -47,9 +47,10 @@ class CmbisKpiResultSearch extends CmbisKpiResult {
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
-                    'kpi_id' => SORT_ASC,
-                    'villcode' => SORT_ASC,
-                    'hcode' => SORT_DESC,
+                    //'kpi_id' => SORT_ASC,
+                    //'villcode' => SORT_ASC,
+                    //'hcode' => SORT_DESC,
+                    //'avgScore' => SORT_DESC,
                 ]
             ],
         ]);
@@ -62,8 +63,7 @@ class CmbisKpiResultSearch extends CmbisKpiResult {
             return $dataProvider;
         }
 
-        $query->select('*,SUM(kpi_result) as sum_result')
-                ->andFilterWhere([
+        $query->andFilterWhere([
             'kpi_id' => $this->kpi_id,
             'kpi_result' => $this->kpi_result,
             'kpi_target' => $this->kpi_target,
@@ -77,7 +77,7 @@ class CmbisKpiResultSearch extends CmbisKpiResult {
                 // andFilterWhere(['like', 'kpi_b_year', $this->kpi_b_year])
                 // ->andFilterWhere(['like', 'hcode', $this->hcode])
                 //->andFilterWhere(['like', 'villcode', $this->villcode])
-                ->andWhere('villcode LIKE "' . $this->villcode . '%" ')
+                //->andWhere('villcode LIKE "' . $this->villcode . '%" ')
                 ->groupBy(['hcode',]);
 
 

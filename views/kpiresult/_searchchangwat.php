@@ -22,21 +22,23 @@ use yii\helpers\ArrayHelper;
                 'options' => ['data-pjax' => true]
     ]);
     ?>
-    <div class="input-group">
-        <?=
-        Html::activeDropDownList($model, 'kpi_id', ArrayHelper::map(app\models\CmbisKpi::find()->all(), 'kpi_id', 'kpi_name'), [
+    <div class="well">
+        <?php
+        echo "เลือกตัวชี้วัด : ";
+        echo Html::activeDropDownList($model, 'kpi_id', ArrayHelper::map(app\models\CmbisKpi::find()->all(), 'kpi_id', 'kpi_name'), [
             'prompt' => 'เลือกตัวชี้วัด',
-            'class' => 'form-control'
+            //'class' => 'form-control'
         ]);
         ?>
-        <span class="input-group-btn">
+        <?php // $form->field($model,'kpi_b_year')->hiddenInput(['value'=> 2559])->label(false); ?>
+        <!--<span class="input-group-btn">-->
             <button class="btn btn-danger" type="submit"><i class="glyphicon glyphicon-search"></i> ค้นหา</button>
         <?php 
             /*if (Yii::$app->user->identity->getIsAdmin()) { 
                 echo Html::a('<i class="glyphicon glyphicon-plus"></i> ' . Yii::t('app', 'เพิ่มตัวชี้วัด'), ['create'], ['class' => 'btn btn-success']); 
             } */
         ?>
-        </span>
+        <!--</span>-->
     </div>
 <?php ActiveForm::end(); ?>
 
