@@ -28,6 +28,7 @@
 
         <?= dmstr\widgets\Menu::widget(
             [
+                
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
                     ['label' => 'เมนู', 'options' => ['class' => 'header']],
@@ -61,30 +62,46 @@
                         ],
                     ],*/
                     [
-                        'label' => 'จัดลำดับหน่วยงาน',
-                        'icon' => 'fa fa-area-chart',
+                        'label' => 'จัดลำดับตามคะแนน',
+                        'icon' => 'glyphicon glyphicon-list-alt',
                         'url' => '#',
                         'items' => [
-                            //['label' => 'อำเภอ', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                            ['label' => 'เปรียบเทียบทั้งจังหวัด', 'icon' => 'fa fa-circle-o', 'url' => ['/kpiresult/changwat'],],
-                            ['label' => 'เปรียบเทียบภายในอำเภอ', 'icon' => 'fa fa-circle-o', 'url' => ['/kpiresult/ampur'],],
-                            ['label' => 'เปรียบเทียบตามขนาด', 'icon' => 'fa fa-circle-o', 'url' => ['/kpiresult/area'],],
+                            ['label' => 'จัดลำดับอำเภอ', 'icon' => 'fa fa-circle-o', 'url' => ['/kpiresult/scoreampur'],],
+                            ['label' => 'จัดลำดับหน่วยงาน', 'icon' => 'fa fa-circle-o', 'url' => ['/kpiresult/scorechangwat'],],
+                            ['label' => 'จัดลำดับหน่วยงานภายในอำเภอ', 'icon' => 'fa fa-circle-o', 'url' => ['/kpiresult/scorehosp'],],
+                            ['label' => 'จัดลำดับตามขนาดประชากร', 'icon' => 'fa fa-circle-o', 'url' => ['/kpiresult/scorearea'],],
                             //['label' => 'เปรียบเทียบตามตัวชี้วัด', 'icon' => 'fa fa-circle-o', 'url' => '#',],
+                            ['label' => 'แผนภูมิเทียบคะแนน', 'icon' => 'fa fa-bar-chart-o', 'url' => ['/site/chart'],'template' => '<a href="{url}">{icon}{label} <span class="label label-success">New</span></a>'],
                         ],
                         'visible' => Yii::$app->user->identity
                     ],
                     [
-                        'label' => 'รายละเอียดตัวชี้วัด',
-                        'icon' => 'fa fa-pencil-square-o',
+                        'label' => 'จัดลำดับตามตัวชี้วัด',
+                        'icon' => 'fa fa-area-chart',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'ตัวชี้วัดที่ใช้เปรียบเทียบปี 2559', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                            ['label' => 'รายงานตัวชี้วัด', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                            ['label' => 'Chart', 'icon' => 'fa fa-circle-o', 'url' => '#',],
-                        ]
+                            ['label' => 'จัดลำดับอำเภอ', 'icon' => 'fa fa-circle-o', 'url' => ['/kpiresult/kpiampur'],],
+                            ['label' => 'จัดลำดับหน่วยงาน', 'icon' => 'fa fa-circle-o', 'url' => ['/kpiresult/changwat'],],
+                            ['label' => 'จัดลำดับหน่วยงานภายในอำเภอ', 'icon' => 'fa fa-circle-o', 'url' => ['/kpiresult/ampur'],],
+                            ['label' => 'จัดลำดับตามขนาดประชากร', 'icon' => 'fa fa-circle-o', 'url' => ['/kpiresult/area'],],
+                            //['label' => 'เปรียบเทียบตามตัวชี้วัด', 'icon' => 'fa fa-circle-o', 'url' => '#',],
+                            ['label' => 'แผนภูมิเทียบตัวชี้วัด', 'icon' => 'fa fa-bar-chart-o', 'url' => ['/site/chartkpi'],'template' => '<a href="{url}">{icon}{label} <span class="label label-success">New</span></a>'],
+                        ],
+                        'visible' => Yii::$app->user->identity
                     ],
-                    ['label' => 'จัดการตัวชี้วัด', 'icon' => 'fa fa-pencil', 'url' => ['/kpi/index'],'visible' => Yii::$app->user->identity],
-                    ['label' => 'SQL Script Query','icon'=>'fa fa-search', 'url' => ['/runquery/index'],'visible' => Yii::$app->user->identity],
+                    ['label' => 'สรุปผลงานหน่วยบริการ', 'icon' => 'glyphicon glyphicon-eye-open', 'url' => ['/kpisummarise/selectamp'],'template' => '<a href="{url}">{icon}{label} <span class="label label-success">New</span></a>','visible' => Yii::$app->user->identity],
+//                    [
+//                        'label' => 'รายละเอียดตัวชี้วัด',
+//                        'icon' => 'fa fa-pencil-square-o',
+//                        'url' => '#',
+//                        'items' => [
+//                            ['label' => 'ตัวชี้วัดที่ใช้เปรียบเทียบปี 2559', 'icon' => 'fa fa-circle-o', 'url' => '#',],
+//                            ['label' => 'รายงานตัวชี้วัด', 'icon' => 'fa fa-circle-o', 'url' => '#',],
+//                            ['label' => 'Chart', 'icon' => 'fa fa-circle-o', 'url' => '#',],
+//                        ]
+//                    ],
+//                    ['label' => 'จัดการตัวชี้วัด', 'icon' => 'fa fa-pencil', 'url' => ['/kpi/index'],'visible' => Yii::$app->user->identity],
+//                    ['label' => 'SQL Script Query','icon'=>'fa fa-search', 'url' => ['/runquery/index'],'visible' => Yii::$app->user->identity],
                     ['label' => 'เกี่ยวกับระบบ', 'icon' => 'fa fa-desktop', 'url' => ['/site/about'],],
 
                 ],

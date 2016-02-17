@@ -10,6 +10,7 @@ use app\models\Campur;
 use yii\helpers\ArrayHelper;
 use yii\data\SqlDataProvider;
 use yii\helpers\Url;
+use yii\data\ActiveDataProvider;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CmbisKpiResultSearch */
@@ -19,6 +20,20 @@ $this->title = 'ผลงานตามตัวชี้วัด';
 $this->params['breadcrumbs'][] = $this->title;
 
 $kpi_id=$searchModel['kpi_id'];
+
+if (!$searchModel['kpi_id'])
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => CmbisKpiResult::find()->where(['kpi_id'=>NULL]),
+            'sort' => [
+                'defaultOrder' => [
+                    'kpi_id' => SORT_ASC,
+                    //'villcode' => SORT_ASC,
+                    'hcode' => SORT_DESC,
+                ]
+            ],
+        ]);
+    }
 
 /*$dataProvider = new SqlDataProvider([
     'sql' => 'SELECT * , avg(r.kpi_score) as avg_score '.
@@ -50,7 +65,7 @@ $kpi_id=$searchModel['kpi_id'];
     //print_r ($model);
 
 ?>
-
+<br/>
 <?= GridView::widget([
                 'id'=>'grid-kpiresult',
                 'dataProvider' => $dataProvider,
@@ -59,8 +74,9 @@ $kpi_id=$searchModel['kpi_id'];
                   'class' => 'table table-bordered  table-striped table-hover',
                 ],
                 'panel'=>[
-                    'type'=>GridView::TYPE_PRIMARY,
-                    'heading'=>'เปรียบเทียบทั้งจังหวัด',
+                    'type'=>GridView::TYPE_SUCCESS,
+                    'heading'=>'เปรียบเทียบระดับหน่วยงาน',
+                    'after' => 'อ้างอิง HDC '
                 ],
                 'columns' => [
                     ['class'=>'kartik\grid\SerialColumn'],
@@ -89,10 +105,16 @@ $kpi_id=$searchModel['kpi_id'];
                         'format'=>['decimal',2],
                         'value' => 'avg_score'
                     ],*/
-                    'kpi_id',
+                    //'kpi_id',
                     'hcode',
                     'hoscode.hosname2',
-                    'amphur.Amp_Des',
+                    'amphur.Amp_Des' => [
+                        'attribute' => 'อำเภอ',
+                        'value' => 'amphur.Amp_Des'
+                    ],
+                    'kpi_target',
+                    'kpi_result',
+                    //'pgroup.pop_group',
                     /*[
                       'attribute' => 'ชื่อสถานบริการ',
                       'value' => function($model){return $model->hoscode->hosname2;},
@@ -100,22 +122,24 @@ $kpi_id=$searchModel['kpi_id'];
                     [
                       'attribute' => 'อำเภอ',
                       'value' => function($model){return $model->amphur->Amp;},
-                    ],*/
-                    //'hosname2',
-                    //'ampurname',
-                    'kpi_function'=>[
-                        'attribute' =>'ผลงาน',
-                        'format' => 'html',
-                        'value'=>function($model){
-                            $url = Url::to(['/kpi/viewtable', 'table' => $model->kpitable->kpi_function,'hcode' => $model['hcode']]);
-                            return Html::a($model['kpi_result'],$url);
-                        },
                     ],
-                    'avg_score' => [
+                    //'hosname2',
+                    */
+                    // 'kpi_miss'=>[
+                    //     'attribute' =>'ส่วนขาด',
+                    //     'format' => 'html',
+                    //     'value'=>function($model){
+                    //         $url = Url::to(['/kpi/viewtable', 'table' => $model->kpitable->kpi_function,'hcode' => $model['hcode']]);
+                    //         return Html::a($model['kpi_miss'],$url);
+                    //     },
+                    // ],
+                    'kpi_percen_result',
+                    'kpi_score',
+                    /*'avg_score' => [
                         'attribute' => 'คะแนน',
                         'format'=>['decimal',2],
                         'value' => 'avgScore',
-                    ],
+                    ],*/
 
                 ],
                 'pager' => [

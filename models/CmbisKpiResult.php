@@ -25,7 +25,7 @@ class CmbisKpiResult extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'cmbis_kpi_results';
+        return 'cmbis_kpi_result_hcode';
     }
 
     /**
@@ -34,12 +34,12 @@ class CmbisKpiResult extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['kpi_id', 'kpi_b_year', 'hcode', 'villcode'], 'required'],
+            [['kpi_id', 'kpi_b_year', 'hcode'], 'required'],
             [['kpi_id', 'kpi_result', 'kpi_target', 'kpi_miss'], 'integer'],
             [['kpi_percen_result', 'kpi_score'], 'number'],
             [['kpi_b_year'], 'string', 'max' => 4],
             [['hcode'], 'string', 'max' => 5],
-            [['villcode'], 'string', 'max' => 8]
+            //[['villcode'], 'string', 'max' => 8]
         ];
     }
     //หาผลรวมของ kpi_result
@@ -66,13 +66,13 @@ class CmbisKpiResult extends \yii\db\ActiveRecord
             ->average('kpi_score');
     }
 
-    public function getAcode()
+    //หาค่าเฉลี่ยของ kpi_score
+    public function getAvgScoreHosp()
     {
         return $this
-            ->hasMany(CmbisKpiResult::className(), ['hcode'=>'hcode','kpi_id'=>'kpi_id'])
-            ->substr('kpi_score',1,4);
+            ->hasMany(CmbisKpiResult::className(), ['hcode'=>'hcode'])
+            ->average('kpi_score');
     }
-
     
     /**
      * @inheritdoc
@@ -83,17 +83,19 @@ class CmbisKpiResult extends \yii\db\ActiveRecord
             'kpi_id' => 'Kpi ID',
             'kpi_b_year' => 'ปี',
             'hcode' => 'รหัสสถานบริการ',
-            'villcode' => 'หมู่',
+            //'villcode' => 'หมู่',
             'kpi_result' => 'ผลงาน',
             'kpi_target' => 'เป้าหมาย',
             'kpi_miss' => 'Kpi Miss',
-            'kpi_percen_result' => '%',
+            'kpi_percen_result' => 'ร้อยละ',
             'kpi_score' => 'คะแนน',
             'sumResult'=>Yii::t('app', 'ผลงาน'),
             'sumTarget'=>Yii::t('app', 'เป้าหมาย'),
             'percen'=>Yii::t('app', '%'),
             'avgScore'=>Yii::t('app','คะแนนเฉลี่ย'),
-            'acode' => Yii::t('app','อำเภอ')
+            'avgScoreHosp'=>Yii::t('app','คะแนนเฉลี่ย'),
+            'hoscode.hosname2' => Yii::t('app','สถานบริการ'),
+            'amphur.Amp_Des' => Yii::t('app','อำเภอ')
         ];
     }
 
@@ -110,5 +112,10 @@ class CmbisKpiResult extends \yii\db\ActiveRecord
     public function getKpitable()
     {
         return $this->hasOne(CmbisKpi::className(),['kpi_id'=>'kpi_id']);
+    }
+
+    public function getPgroup()
+    {
+        return $this->hasOne(CmbisHospital::className(),['hcode'=>'hcode']);
     }
 }

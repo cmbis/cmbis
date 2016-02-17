@@ -20,10 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php yii\widgets\Pjax::begin(['id' => 'grid-kpiresult-pjax','timeout'=>5000]) ?>
 
-<?php echo $this->render('_search', ['model' => $searchModel]);?>
+<?php echo $this->render('_searchampur', ['model' => $searchModel]);?>
 <br>
 <?php
-    if (!$searchModel['kpi_id'] || !$searchModel['hcode'])
+    if (!$searchModel['hcode'])
     {
         $dataProvider = new ActiveDataProvider([
             'query' => CmbisKpiResult::find()->where(['kpi_id'=>NULL]),
@@ -47,8 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
                   'class' => 'table table-bordered  table-striped table-hover',
                 ],
                 'panel'=>[
-                    'type'=>GridView::TYPE_SUCCESS,
-                    'heading'=>'เปรียบเทียบระดับหน่วยงาน ภายในอำเภอ',
+                    'type'=>GridView::TYPE_PRIMARY,
+                    'heading'=>'จัดอันดับคะแนนระดับหน่วยงาน ภายในอำเภอ',
                     //'before' => 'kpi_name',
                 ],
                 'columns' => [
@@ -82,8 +82,8 @@ $this->params['breadcrumbs'][] = $this->title;
                       'value' => function($model){return $model->hoscode->hosname2;},
                     ],
                     //'villcode',
-                    'kpi_target',
-                    'kpi_result',
+                    //'kpi_target',
+                    //'kpi_result',
                     //'sumTarget',
                     //'sumResult',
                     //'kpi_percen_result',
@@ -91,8 +91,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         'label' => '%',
                         'value' => 'kpi_percen_result',
                     ],*/
-                    'kpi_percen_result',
-                    'kpi_score',
+                    //'percen',
+                    //'kpi_score',
+                    //'avgScoreHosp',
+                    'avg_score' => [
+                        'attribute' => 'คะแนนเฉลี่ย',
+                        'format'=>['decimal',2],
+                        'value' => 'avgScoreHosp'
+                    ],
                     //'amphur.Amp_Des'
                     /*[
                       'label'=>'ผลการประเมิน',
@@ -111,10 +117,6 @@ $this->params['breadcrumbs'][] = $this->title;
                       'template'=>'<div class="btn-group btn-group-sm text-center" role="group"> {view} {update} {delete} </div>',
                       'visible' => Yii::$app->user->identity->getIsAdmin()
                    ],*/
-                ],
-                'pager' => [
-                    'firstPageLabel' => 'หน้าแรก',
-                    'lastPageLabel' => 'หน้าสุดท้าย',
                 ],
             ]); ?>
 <?php yii\widgets\Pjax::end() ?>

@@ -1,0 +1,47 @@
+<div class="chart-column box" style="min-width: 320px; height: 410px; margin: 5 auto; display:none">
+<?php // HighChart Test
+
+echo Highcharts::widget([
+    'scripts' => [
+     'highcharts-more',   // enables supplementary chart types (gauge, arearange, columnrange, etc.)
+     //'modules/exporting', // adds Exporting button/menu to chart
+     //'themes/grid'        // applies global 'grid' theme to all charts
+    ],
+   'options'=>[
+      'chart'=> [
+            'type'=> 'column'
+        ],
+      'title'=> [ 'text'=> '5 อันดับคะแนน' ],
+      'xAxis'=> [
+        'categories'=> ['กัลยาณิวัฒนา', 'ฝาง', 'สันกำแพง' , 'แม่แตง' , 'แม่ออน'],
+        'type'=> 'category',
+            'labels'=> [
+                'rotation'=> -45,
+                'style'=> [
+                    'fontSize'=> '13px',
+                    'fontFamily'=> 'Verdana, sans-serif'
+                ]
+            ]
+      ],
+      'yAxis'=> [
+         'title'=> [ 'text'=> 'คะแนนเฉลี่ย' ]
+      ],
+      'legend'=> [
+            'enabled'=> false
+        ],
+      'series'=> [
+         [  'colorByPoint'=> true,
+            'name'=> 'คะแนนเฉลี่ย', 
+            'data'=> [
+                        ['กัลยาณิวัฒนา',5.20], 
+                        ['ฝาง',4.87], 
+                        ['สันกำแพง',3.93], 
+                        ['แม่แตง',3.93], 
+                        ['แม่ออน',3.53]
+                    ] 
+                ]
+      ]
+   ]
+]);
+?>
+</div>

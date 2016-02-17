@@ -8,7 +8,8 @@ use app\models\CmbisKpiResult;
 use app\models\Chospital;
 use app\models\Campur;
 use yii\helpers\ArrayHelper;
-use yii\data\SqlDataProvider;
+//use yii\data\SqlDataProvider;
+use yii\data\ActiveDataProvider;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CmbisKpiResultSearch */
@@ -17,11 +18,11 @@ use yii\data\SqlDataProvider;
 $this->title = 'ผลงานตามตัวชี้วัด';
 $this->params['breadcrumbs'][] = $this->title;
 
-$kpi_id=$searchModel['kpi_id'];
-$pop_group=$searchModel['kpi_miss'];
+//$kpi_id=$searchModel['kpi_id'];
+//$pop_group=$searchModel['kpi_miss'];
 //echo "ค่า pop_group = ".$pop_group;
 
-$dataProvider = new SqlDataProvider([
+/*$dataProvider = new SqlDataProvider([
     'sql' => 'SELECT *, sum(cmbis_kpi_results.kpi_score) as sum_score , ' . 
              'avg(cmbis_kpi_results.kpi_score) as avg_score , ' . 
              'substr(cmbis_kpi_results.villcode,1,4) as vcode ' .
@@ -39,13 +40,30 @@ $dataProvider = new SqlDataProvider([
     ],
     'params' => [':kpi_id' => $kpi_id,
                  ':pop_group' => $pop_group],
-]);
+]);*/
 
 ?>
 
 <?php yii\widgets\Pjax::begin(['id' => 'grid-kpiresult-pjax','timeout'=>5000]) ?>
 
 <?php  echo $this->render('_searcharea', ['model' => $searchModel]);?>
+<?php
+    if (!$searchModel['kpi_id'] || !$searchModel['kpi_miss'])
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => CmbisKpiResult::find()->where(['kpi_id'=>NULL]),
+            'sort' => [
+                'defaultOrder' => [
+                    'kpi_id' => SORT_ASC,
+                    //'villcode' => SORT_ASC,
+                    'hcode' => SORT_DESC,
+                ]
+            ],
+        ]);
+    }
+    //print_r($dataProvider);
+?>
+
 <br>
 
 
@@ -57,14 +75,23 @@ $dataProvider = new SqlDataProvider([
                   'class' => 'table table-bordered  table-striped table-hover',
                 ],
                 'panel'=>[
-                    'type'=>GridView::TYPE_PRIMARY,
+                    'type'=>GridView::TYPE_SUCCESS,
                     'heading'=>'เปรียบเทียบตามขนาดประชากร',
 
                 ],
                 'columns' => [
                     ['class'=>'kartik\grid\SerialColumn'],
-                    //'ampurcodefull',
-                    [
+                    //'kpi_id',
+                    'hcode',
+                    'hoscode.hosname2',
+                    //'kpi_miss',
+                    //'pgroup.pop_group',
+                    'amphur.Amp_Des',
+                    'kpi_target',
+                    'kpi_result',
+                    'kpi_percen_result',
+                    'kpi_score'
+                    /*[
                         'class'=>'kartik\grid\ExpandRowColumn',
                         'width'=>'20px',
                         'value'=>function ($model, $key, $index, $widget) { 
@@ -78,18 +105,22 @@ $dataProvider = new SqlDataProvider([
                     'ampurname' => [
                         'attribute' => 'อำเภอ',
                         'value' => 'ampurname'
-                    ],
+                    ],*/
                     /*'sum_score' => [
                         'attribute' => 'คะแนนรวม',
                         'value' => 'sum_score'
-                    ],*/
+                    ],
                     'avg_score' => [
                         'attribute' => 'ค่าเฉลี่ยคะแนน',
                         'format'=>['decimal',2],
                         'value' => 'avg_score'
-                    ],
+                    ],*/
 
 
+                ],
+                'pager' => [
+                    'firstPageLabel' => 'หน้าแรก',
+                    'lastPageLabel' => 'หน้าสุดท้าย',
                 ],
             ]); ?>
 <?php yii\widgets\Pjax::end() ?>

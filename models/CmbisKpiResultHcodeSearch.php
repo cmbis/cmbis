@@ -10,7 +10,7 @@ use app\models\CmbisKpiResult;
 /**
  * CmbisKpiResultSearch represents the model behind the search form about `app\models\CmbisKpiResult`.
  */
-class CmbisKpiResultSearch extends CmbisKpiResult {
+class CmbisKpiResultHcodeSearch extends CmbisKpiResultHcode {
 
     /**
      * @inheritdoc
@@ -52,7 +52,7 @@ class CmbisKpiResultSearch extends CmbisKpiResult {
                 'defaultOrder' => [
                     //'kpi_id' => SORT_ASC,
                     //'villcode' => SORT_ASC,
-                    'kpi_percen_result' => SORT_DESC,
+                    //'hcode' => SORT_DESC,
                     'kpi_score' => SORT_DESC,
                 ]
             ],
@@ -83,7 +83,8 @@ class CmbisKpiResultSearch extends CmbisKpiResult {
                 //->andFilterWhere(['like', 'villcode', $this->villcode])
                 ->andWhere('cmbis_area_hosp.Amp LIKE "' . $this->hcode . '%" ')
                 ->andWhere('pop_group LIKE "' . $this->kpi_miss . '%" ')
-                ->groupBy(['cmbis_kpi_result_hcode.hcode',]);
+                ->groupBy(['cmbis_kpi_result_hcode.hcode',])
+                ->orderBy('avg(kpi_score) DESC');
 
 
         return $dataProvider;

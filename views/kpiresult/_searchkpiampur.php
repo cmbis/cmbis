@@ -17,7 +17,7 @@ use yii\helpers\ArrayHelper;
 
     <?php
     $form = ActiveForm::begin([
-                'action' => ['changwat'],
+                'action' => ['kpiampur'],
                 'method' => 'get',
                 'options' => ['data-pjax' => true]
     ]);
@@ -64,7 +64,7 @@ use yii\helpers\ArrayHelper;
     
     <?= $form->field($model, 'kpi_b_year') ?>
     
-    <?= $form->field($model, 'hcode') ?>
+    <?= $form->field($model, 'amp') ?>
     
     <?php // $form->field($model, 'villcode') ?>
     

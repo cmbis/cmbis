@@ -17,7 +17,7 @@ use yii\helpers\ArrayHelper;
 
     <?php
     $form = ActiveForm::begin([
-                'action' => ['area'],
+                'action' => ['scorearea'],
                 'method' => 'get',
                 'options' => ['data-pjax' => true]
     ]);
@@ -25,14 +25,7 @@ use yii\helpers\ArrayHelper;
     ?>
     <div class="box box-body box-success">
         <div class="row">
-            <div class="col-lg-4">
-                <?=
-                Html::activeDropDownList($model, 'kpi_id', ArrayHelper::map(app\models\CmbisKpi::find()->all(), 'kpi_id', 'kpi_name'), [
-                    'prompt' => 'เลือกตัวชี้วัด',
-                    'class' => 'form-control'
-                ]);
-                ?></div>
-            <div class="col-lg-4">
+            <div class="col-lg-8">
                 <?=
                 Html::activeDropDownList($model, 'kpi_miss', ArrayHelper::map(app\models\CmbisPopGroups::find()->all(), 'pop_group_id', 'pop_grouup_name'), [
                     'prompt' => 'เลือกกลุ่มประชากร',

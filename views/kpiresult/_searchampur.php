@@ -17,22 +17,14 @@ use yii\helpers\ArrayHelper;
 
     <?php
     $form = ActiveForm::begin([
-                'action' => ['ampur'],
+                'action' => ['scorehosp'],
                 'method' => 'get',
                 'options' => ['data-pjax' => true]
     ]);
     ?>
     <div class="box box-body box-success">
     <div class="row">
-        <div class="col-lg-4">
-            <?=
-            Html::activeDropDownList($model, 'kpi_id', ArrayHelper::map(app\models\CmbisKpi::find()->all(), 'kpi_id', 'kpi_name'), [
-                'prompt' => 'เลือกตัวชี้วัด',
-                'class' => 'form-control'
-            ]);
-            ?>
-        </div>
-        <div class="col-lg-4">
+        <div class="col-lg-8">
             <?=
             Html::activeDropDownList($model, 'hcode', ArrayHelper::map(app\models\Campur::find()->where(['changwatcode' => '50'])->all(), 'ampurcodefull', 'ampurname'), [
                 'prompt' => 'เลือกอำเภอ',

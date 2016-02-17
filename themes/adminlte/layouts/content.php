@@ -38,7 +38,7 @@ use yii\helpers\Html;
 
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Version</b> 1.0
+        <b>Version</b> DEMO
     </div>
     <strong><?= Yii::$app->name; ?>&copy; 2015 </strong>
 </footer>

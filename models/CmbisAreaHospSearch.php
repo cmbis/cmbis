@@ -44,6 +44,13 @@ class CmbisAreaHospSearch extends CmbisAreaHosp
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    //'kpi_id' => SORT_ASC,
+                    //'villcode' => SORT_ASC,
+                    'kpi_percen_result' => SORT_DESC,
+                    'kpi_score' => SORT_DESC,
+                ]
         ]);
 
         $this->load($params);

@@ -14,9 +14,9 @@ use yii\data\SqlDataProvider;
 //$this->params['breadcrumbs'][] = ['label' => 'ผลงานตามตัวชี้วัด', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
 //print_r($_GET);
-$kpi_id = $_GET['CmbisKpiResultSearch']['kpi_id'];
-$pop_group = $_GET['CmbisKpiResultSearch']['kpi_miss'];
-$dataProvider = new SqlDataProvider([
+//$kpi_id = $_GET['CmbisKpiResultSearch']['kpi_id'];
+//$pop_group = $_GET['CmbisKpiResultSearch']['kpi_miss'];
+/*$dataProvider = new SqlDataProvider([
     'sql' => 'SELECT *, sum(kpi_result) as sum_result, sum(kpi_target) as sum_target, ' . 
              'format(sum(kpi_result)*100/sum(kpi_target),2) as percen '.
              'FROM cmbis_kpi_results ' .
@@ -31,7 +31,7 @@ $dataProvider = new SqlDataProvider([
         'pageSize' => 25,
     ],
     'params' => [':kpi_id' => $kpi_id],
-]);
+]);*/
 
 
 //echo $model['hcode'];

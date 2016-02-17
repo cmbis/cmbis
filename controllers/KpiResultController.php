@@ -4,10 +4,16 @@ namespace app\controllers;
 
 use Yii;
 use app\models\CmbisKpiResult;
+use app\models\CmbisKpiResultAmp;
+use app\models\CmbisKpiResultAmpSearch;
+use app\models\CmbisKpiResultHcode;
+use app\models\CmbisKpiResultHcodeSearch;
 use app\models\CmbisKpiResultSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
+use yii\data\Sort;
 
 /**
  * KpiresultController implements the CRUD actions for CmbisKpiResult model.
@@ -49,12 +55,30 @@ class KpiresultController extends Controller {
         ]);
     }
 
-    public function actionChangwat1() {
-        $searchModel = new CmbisKpiResultSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    public function actionScorechangwat() {
+        $query = CmbisKpiResultHcode::find()
+                -> groupBy(['hcode',])
+                -> orderBy('avg(kpi_score) DESC');
 
-        return $this->render('changwat', [
-                    'searchModel' => $searchModel,
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 25,
+            ],
+        ]);
+
+        $dataProvider->setSort([
+        'attributes' => [
+            'avgScore' => [
+                            'asc' =>    [ 'avg(kpi_score)' => SORT_ASC],
+                            'desc' =>   [ 'avg(kpi_score)' => SORT_DESC],
+                            'default' => SORT_ASC,
+                            'label' =>  'avg_score',
+                          ],
+                        ],
+        ]);
+
+        return $this->render('scorechangwat', [
                     'dataProvider' => $dataProvider,
         ]);
     }
@@ -68,6 +92,38 @@ class KpiresultController extends Controller {
                     'dataProvider' => $dataProvider,
         ]);
     }
+
+    public function actionKpiampur() {
+        $searchModel = new CmbisKpiResultAmpSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('kpiampur', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionScorehosp() {
+        $searchModel = new CmbisKpiResultHcodeSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+
+        $dataProvider->setSort([
+        'attributes' => [
+            'avgScoreHosp' => [
+                            'asc' =>    [ 'avg(kpi_score)' => SORT_ASC],
+                            'desc' =>   [ 'avg(kpi_score)' => SORT_DESC],
+                            'default' => SORT_DESC,
+                            'label' =>  'avg_score'
+                          ],
+                        ]
+        ]);
+
+        return $this->render('scorehosp', [
+                    'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+        ]);
+    }
     
     public function actionArea() {
         $searchModel = new CmbisKpiResultSearch();
@@ -75,6 +131,46 @@ class KpiresultController extends Controller {
 
         return $this->render('area', [
                     'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionScorearea() {
+        $searchModel = new CmbisKpiResultHcodeSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('scorearea', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
+    }
+
+
+    public function actionScoreampur() {
+        
+        $query = CmbisKpiResultAmp::find()
+                -> groupBy(['amp',])
+                -> orderBy('avg(kpi_score) DESC');
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 25,
+            ],
+        ]);
+
+        $dataProvider->setSort([
+        'attributes' => [
+            'avgScore' => [
+                            'asc' =>    [ 'avg(kpi_score)' => SORT_ASC],
+                            'desc' =>   [ 'avg(kpi_score)' => SORT_DESC],
+                            'default' => SORT_ASC,
+                            'label' =>  'avg_score'
+                          ],
+                        ]
+        ]);     
+
+        return $this->render('scoreampur', [
                     'dataProvider' => $dataProvider,
         ]);
     }

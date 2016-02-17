@@ -79,7 +79,11 @@ $config = [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-            'site/*', 
+            'site/*',
+            'kpiresult/*', 
+            'kpisummarise/selectamp',
+            'kpisummarise/selecthcode',
+            'kpisummarise/selectkpi',
             'user/registration/*',
             'user/recovery/*',
             'admin/*',

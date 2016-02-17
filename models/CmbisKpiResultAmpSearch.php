@@ -10,7 +10,7 @@ use app\models\CmbisKpiResult;
 /**
  * CmbisKpiResultSearch represents the model behind the search form about `app\models\CmbisKpiResult`.
  */
-class CmbisKpiResultSearch extends CmbisKpiResult {
+class CmbisKpiResultAmpSearch extends CmbisKpiResultAmp {
 
     /**
      * @inheritdoc
@@ -20,8 +20,8 @@ class CmbisKpiResultSearch extends CmbisKpiResult {
     public function rules() {
         return [
             [['kpi_id', 'kpi_result', 'kpi_target', 'kpi_miss'], 'integer'],
-            [['kpi_b_year', 'hcode',  'q'], 'safe'],
-            [['kpi_percen_result', 'kpi_score','avgScore'], 'number'],
+            [['kpi_percen_result', 'kpi_score'], 'number'],
+            [['kpi_b_year', 'amp',  'q'], 'safe'],
         ];
     }
 
@@ -41,10 +41,10 @@ class CmbisKpiResultSearch extends CmbisKpiResult {
      * @return ActiveDataProvider
      */
     public function search($params) {
-        $query = CmbisKpiResult::find();
-        $query -> innerJoin('cmbis_area_hosp', 'Hosp=hcode');
-        $query -> innerJoin('cmbis_hospital', 'cmbis_hospital.hcode=cmbis_kpi_result_hcode.hcode');
-        $query -> innerJoin('cmbis_pop_groups', 'pop_group_id=pop_group');
+        $query = CmbisKpiResultAmp::find();
+        // $query -> innerJoin('cmbis_area_hosp', 'Hosp=hcode');
+        // $query -> innerJoin('cmbis_hospital', 'cmbis_hospital.hcode=cmbis_kpi_result_hcode.hcode');
+        // $query -> innerJoin('cmbis_pop_groups', 'pop_group_id=pop_group');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -55,6 +55,9 @@ class CmbisKpiResultSearch extends CmbisKpiResult {
                     'kpi_percen_result' => SORT_DESC,
                     'kpi_score' => SORT_DESC,
                 ]
+            ],
+            'pagination' => [
+                'pageSize' => 25,
             ],
         ]);
 
@@ -76,14 +79,15 @@ class CmbisKpiResultSearch extends CmbisKpiResult {
             //'pop_group' => $this->pop_group,
         ]);
 
-        $query->andFilterWhere(['like', 'kpi_id', $this->q])
+        $query->andFilterWhere(['like', 'kpi_id', $this->q]);
 
                 // andFilterWhere(['like', 'kpi_b_year', $this->kpi_b_year])
                 // ->andFilterWhere(['like', 'hcode', $this->hcode])
                 //->andFilterWhere(['like', 'villcode', $this->villcode])
-                ->andWhere('cmbis_area_hosp.Amp LIKE "' . $this->hcode . '%" ')
-                ->andWhere('pop_group LIKE "' . $this->kpi_miss . '%" ')
-                ->groupBy(['cmbis_kpi_result_hcode.hcode',]);
+                // ->andWhere('cmbis_area_hosp.Amp LIKE "' . $this->hcode . '%" ')
+                // ->andWhere('pop_group LIKE "' . $this->kpi_miss . '%" ')
+                //->groupBy(['amp',])
+                // ->orderBy('avg(kpi_score) DESC');
 
 
         return $dataProvider;

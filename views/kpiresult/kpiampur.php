@@ -4,7 +4,7 @@
 //use yii\grid\GridView;
 use kartik\grid\GridView;
 //use yii\widgets\Pjax;
-use app\models\CmbisKpiResult;
+use app\models\CmbisKpiResultAmp;
 //use app\models\Chospital;
 //use app\models\Campur;
 //use yii\helpers\ArrayHelper;
@@ -20,18 +20,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php yii\widgets\Pjax::begin(['id' => 'grid-kpiresult-pjax','timeout'=>5000]) ?>
 
-<?php echo $this->render('_search', ['model' => $searchModel]);?>
+<?php echo $this->render('_searchkpiampur', ['model' => $searchModel]);?>
 <br>
 <?php
-    if (!$searchModel['kpi_id'] || !$searchModel['hcode'])
+    if (!$searchModel['kpi_id'])
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => CmbisKpiResult::find()->where(['kpi_id'=>NULL]),
+            'query' => CmbisKpiResultAmp::find()->where(['kpi_id'=>NULL]),
             'sort' => [
                 'defaultOrder' => [
-                    'kpi_id' => SORT_ASC,
+                    //'kpi_id' => SORT_ASC,
                     //'villcode' => SORT_ASC,
-                    'hcode' => SORT_DESC,
+                    //'amp' => SORT_DESC,
                 ]
             ],
         ]);
@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'panel'=>[
                     'type'=>GridView::TYPE_SUCCESS,
-                    'heading'=>'เปรียบเทียบระดับหน่วยงาน ภายในอำเภอ',
+                    'heading'=>'เปรียบเทียบระดับอำเภอ',
                     //'before' => 'kpi_name',
                 ],
                 'columns' => [
@@ -76,11 +76,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         //'enableRowClick'=>'kv-disable-click',
 
                     ],*/
-                    'hcode',
-                    [
-                      'attribute' => 'สถานบริการ',
-                      'value' => function($model){return $model->hoscode->hosname2;},
-                    ],
+                    'amp',
+                    'amphur.Amp_Des',
                     //'villcode',
                     'kpi_target',
                     'kpi_result',

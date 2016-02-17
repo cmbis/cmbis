@@ -19,7 +19,9 @@ $user = Yii::$app->user->identity;
         <div class="navbar-custom-menu">
 
             <ul class="nav navbar-nav">
-
+            <li class="tasks-menu">
+                <a href="<?=Yii::$app->homeUrl?>"><i class="glyphicon glyphicon-home"></i> หน้าหลัก</a> 
+            </li>
                 <!-- User Account: style can be found in dropdown.less -->
                 <?php if(!Yii::$app->user->isGuest){ ?> 
                 <li class="dropdown user user-menu">
@@ -30,7 +32,7 @@ $user = Yii::$app->user->identity;
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="http://gravatar.com/avatar/<?= $user->profile->gravatar_id ?>?s=24" class="img-circle" alt="<?= $user->username ?>"/>
+                            <img src="http://gravatar.com/avatar/<?= $user->profile->gravatar_id ?>" class="img-circle" alt="<?= $user->username ?>"/>
 
                             <p>
                                 <?php echo Yii::$app->user->identity->username; ?>
