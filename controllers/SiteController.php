@@ -101,79 +101,79 @@ ORDER BY avgScore DESC";
 $rawData = Yii::$app->db->createCommand($sql)->queryAll();
 foreach ($rawData as $data) {
     if($data['AMP']=='5001'){
-        $a5001[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5001[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5002'){
-        $a5002[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5002[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5003'){
-        $a5003[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5003[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5004'){
-        $a5004[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5004[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5005'){
-        $a5005[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5005[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5006'){
-        $a5006[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5006[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5007'){
-        $a5007[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5007[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5008'){
-        $a5008[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5008[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5009'){
-        $a5009[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5009[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5010'){
-        $a5010[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5010[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5011'){
-        $a5011[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5011[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5012'){
-        $a5012[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5012[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5013'){
-        $a5013[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5013[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5014'){
-        $a5014[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5014[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5015'){
-        $a5015[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5015[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5016'){
-        $a5016[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5016[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5017'){
-        $a5017[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5017[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5018'){
-        $a5018[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5018[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5019'){
-        $a5019[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5019[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5020'){
-        $a5020[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5020[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5021'){
-        $a5021[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5021[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5022'){
-        $a5022[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5022[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5023'){
-        $a5023[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5023[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5024'){
-        $a5024[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5024[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5025'){
-        $a5025[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5025[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
 }
 $sub_a5001 = json_encode($a5001);
@@ -263,79 +263,79 @@ ORDER BY avgScore DESC";
 $rawData = Yii::$app->db->createCommand($sql)->queryAll();
 foreach ($rawData as $data) {
     if($data['AMP']=='5001'){
-        $a5001[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5001[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5002'){
-        $a5002[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5002[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5003'){
-        $a5003[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5003[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5004'){
-        $a5004[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5004[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5005'){
-        $a5005[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5005[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5006'){
-        $a5006[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5006[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5007'){
-        $a5007[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5007[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5008'){
-        $a5008[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5008[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5009'){
-        $a5009[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5009[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5010'){
-        $a5010[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5010[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5011'){
-        $a5011[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5011[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5012'){
-        $a5012[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5012[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5013'){
-        $a5013[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5013[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5014'){
-        $a5014[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5014[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5015'){
-        $a5015[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5015[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5016'){
-        $a5016[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5016[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5017'){
-        $a5017[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5017[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5018'){
-        $a5018[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5018[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5019'){
-        $a5019[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5019[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5020'){
-        $a5020[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5020[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5021'){
-        $a5021[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5021[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5022'){
-        $a5022[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5022[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5023'){
-        $a5023[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5023[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5024'){
-        $a5024[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5024[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
     if($data['AMP']=='5025'){
-        $a5025[] = [$data['Hosp'],$data['avgScore']*1];
+        $a5025[] = [$data['Hosp_des'],$data['avgScore']*1];
     }
 }
 $sub_a5001 = json_encode($a5001);

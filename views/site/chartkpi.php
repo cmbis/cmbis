@@ -18,6 +18,12 @@ $this->title = 'แผนภูมิแท่งเปรียบเทีย�
                 echo Html::dropDownList('kpi', $kpi, $result,[
                     'class' => 'form-control', 'prompt'=>'เลือกตัวชี้วัด'
                 ]);
+                $target = Yii::$app->db->createCommand('
+    SELECT kpi_percent_target FROM cmbis_kpi WHERE kpi_id=:kpi_id
+', [':kpi_id' => $kpi])->queryScalar();
+                if ($target==null){
+                    $target=60;
+                }
                 ?>
             </div>
             <div class='col-sm-2'>
@@ -42,7 +48,7 @@ $this->title = 'แผนภูมิแท่งเปรียบเทีย�
 </div>
 
 
-<div id="chart1" style="min-width: 220px; height: 410px; margin: 5 auto; text-align: center;"></div>
+<div id="chart1" style="min-width: 220px; height: 420px; margin: 5 auto; text-align: center;"></div>
 
 <?php
 $this->registerJs("$(function () {
@@ -65,8 +71,23 @@ $this->registerJs("$(function () {
         },
         yAxis: {
             title: {
-                text: '<b>ร้อยละ</b>'
+                text: '<b>ร้อยละ</b>',
             },
+            min: 0,
+            max: 100,
+            plotLines: [{
+                value: $target,
+                dashStyle: 'dash',
+                color: 'red',
+                width: 2,
+                label: {
+                    text: 'เป้าหมาย: $target%',
+                    align: 'center',
+                    style: {
+                        color: 'gray'
+                    }
+                }
+            }]
         },
         legend: {
             enabled: true

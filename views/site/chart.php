@@ -20,11 +20,12 @@ $this->title = 'แผนภูมิแท่งเปรียบเทีย�
 </div>
 
 
-<div id="chart1" style="min-width: 220px; height: 410px; margin: 5 auto; text-align: center;"></div>
+<div id="chart1" style="min-width: 220px; height: 480px; margin: 5 auto; text-align: center;"></div>
 
 
 
 <?php
+
 $this->registerJs("$(function () {
     $('#chart1').highcharts({
         chart: {
@@ -47,6 +48,8 @@ $this->registerJs("$(function () {
             title: {
                 text: '<b>คะแนนเฉลี่ย</b>'
             },
+            min: 0,
+            max: 10
         },
         legend: {
             enabled: true
